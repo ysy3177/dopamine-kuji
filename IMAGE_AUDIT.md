@@ -1,10 +1,10 @@
 # Kuji image audit
 
-Themes: 19. Images cached this run: 4. Broken: 3. Duplicate URLs: 52.
+Themes: 19. Images cached this run: 1. Broken: 3. Duplicate URLs: 52.
 
 ## Unavailable images
-- dressPrizes / F / https://www.goodsmile.com/en/product/11628/Nendoroid%20Doll%20Marin%20Kitagawa / Product page lacks og:image
-- dressPrizes / H / https://www.goodsmile.com/en/product/36099/Nendoroid%2BMarin%2BKitagawa%2BSwimsuit%2BVer. / Product page lacks og:image
+- quintPrizes / E / https://www.prime1studio.co.jp/en/pspgthn-17.html / HTTP Error 404: Not Found
+- dressPrizes / H / https://www.zenintcg.com/collections/all/products/my-dress-up-darling-nendoroid-2433-marin-kitagawa-swimsuit-ver / HTTP Error 404: Not Found
 - bluePrizes / G / https://m.comics-art.co.kr/web/upload/NNEditor/20230725/mobile/2cd61920d19d40120d59dcc86f7d0230_1690257816.jpg / Product page lacks og:image
 
 ## Duplicate photo sources
