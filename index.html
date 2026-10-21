@@ -614,7 +614,7 @@ const pokemonPrizes=
     "g": "B",
     "name": "피카츄 포켓몬센터 앉은 봉제인형",
     "count": 2,
-    "url": "https://hobby-genki.com/404404-thickbox_default/pikachu-pokemon-sitting-plush-toy.jpg"
+    "url": "https://www.pokemoncenter-online.com/a/img/item/4521329333687/L/cdf61577f2a84bb764e3e7f767c71e931e4f494bafd593616a966b2320f33cda.jpg"
   },
   {
     "g": "C",
@@ -689,13 +689,13 @@ const nikkePrizes=
     "g": "F",
     "name": "아니스 넨도로이드 피규어",
     "count": 22,
-    "url": "https://hobby-genki.com/200657-thickbox_default/nendoroid-anis-goddess-of-victory-nikke-figure.jpg"
+    "url": "https://www.kappahobby.com/cdn/shop/files/G17952_3.jpg?v=1707835867"
   },
   {
     "g": "G",
     "name": "라피 PalVerse Palé. 피규어",
     "count": 28,
-    "url": "https://hobby-genki.com/449806-large_default/palverse-pale-goddess-of-victory-nikke-rapi-figure-bushiroad.jpg"
+    "url": "https://meccha-japan.com/831019-large_default/figure-rapi-goddess-of-victory-nikke-palverse-pale.jpg"
   },
   {
     "g": "LAST",
@@ -734,7 +734,7 @@ const bluePrizes=
     "g": "E",
     "name": "하야세 유우카 넨도로이드",
     "count": 14,
-    "url": "https://hobby-genki.com/169317-large_default/nendoroid-hayase-yuuka-blue-archive-figure-limited-bonus-set.jpg"
+    "url": "https://hobby-genki.com/169304-thickbox_default/nendoroid-hayase-yuuka-blue-archive-figure.jpg"
   },
   {
     "g": "F",
@@ -792,7 +792,25 @@ function changeMode(next){
 const $=id=>document.getElementById(id);
 function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function start(){let deck=shuffle(prizes.slice(0,-1).flatMap((p,i)=>Array(p.count).fill(i)));slots=deck.map((p,i)=>({p,used:false}));draws=[];queue=0;active=null;finished=false;selectedTickets=[];batchTickets=[];selectionCount=1;render()}
-function imgTag(p){return `<div class="imgbox"><img src="${picture(p)}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="missing" style="display:none">이미지를 불러오지 못했어요.<br>📷 사진 추가로 등록 가능</div></div>`}
+const photoBackups={
+ "피카츄 포켓몬센터 앉은 봉제인형":["https://www.pokemoncenter-online.com/a/img/item/4521329333687/L/cdf61577f2a84bb764e3e7f767c71e931e4f494bafd593616a966b2320f33cda.jpg"],
+ "아니스 넨도로이드 피규어":["https://hobby-genki.com/200657-thickbox_default/nendoroid-anis-goddess-of-victory-nikke-figure.jpg"],
+ "라피 PalVerse Palé. 피규어":["https://www.prexhobby.com/cdn/shop/files/71d0eab3-854f-4582-8060-05bd8cedcb05.png?v=1772708541&width=1600"],
+ "하야세 유우카 넨도로이드":["https://img2.animatetimes.com/2023/10/6a73a94f656e67c225d57750f54aa6ad6538d59e8ae0e9_45492704_06e344ae4367145a2d34024280d7050aefe08898.jpg"]
+};
+function photoError(img){
+ const name=img.getAttribute('alt')||'';
+ const fallbacks=photoBackups[name]||[];
+ const idx=Number(img.dataset.fallbackIndex||0);
+ if(idx<fallbacks.length && img.src!==fallbacks[idx]){
+   img.dataset.fallbackIndex=String(idx+1);
+   img.src=fallbacks[idx];
+   return;
+ }
+ img.style.display='none';
+ if(img.nextElementSibling)img.nextElementSibling.style.display='flex';
+}
+function imgTag(p){return `<div class="imgbox"><img src="${picture(p)}" alt="${p.name}" loading="lazy" onerror="photoError(this)"><div class="missing" style="display:none">이미지를 불러오지 못했어요.<br>📷 사진 추가로 등록 가능</div></div>`}
 function render(){
  const remain=slots.filter(s=>!s.used).length;
  const paid=draws.filter(x=>x!==prizes.length-1).length;
@@ -903,7 +921,7 @@ function reveal(){if(active===null||finished)return;ripSound(1,true);finished=tr
  $('scratchArea').style.display='none';
  $('batchResult').style.display='grid';
  $('batchResult').innerHTML=batchTickets.map((id,k)=>{const p=prizes[slots[id].p];return `<div class="batch-item">
- <div class="batch-photo"><img src="${picture(p)}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="batch-photo-missing" style="display:none">상품 사진<br>연결 불가</div></div>
+ <div class="batch-photo"><img src="${picture(p)}" alt="${p.name}" loading="lazy" onerror="photoError(this)"><div class="batch-photo-missing" style="display:none">상품 사진<br>연결 불가</div></div>
  <div class="batch-info"><span>선택 티켓 ${String(id+1).padStart(2,'0')}</span><b>${p.g}상</b><strong>${p.name}</strong></div></div>`}).join('');
  $('prizeName').textContent='선택한 '+batchTickets.length+'장의 결과';$('prizeGrade').textContent='ALL OPEN';
 }
