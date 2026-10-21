@@ -1,6 +1,6 @@
 # Kuji image audit
 
-Themes: 20. Images cached this run: 10. Broken: 0. Duplicate URLs: 0.
+Themes: 20. Images cached this run: 0. Broken: 0. Duplicate URLs: 0.
 
 ## Unavailable images
 None
