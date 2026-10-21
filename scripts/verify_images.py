@@ -66,6 +66,22 @@ for theme,items in prizes.items():
     source,n=re.subn(pattern,lambda m:m.group(1)+json.dumps(items,ensure_ascii=False,indent=2)+m.group(2),source,count=1)
     if n!=1:raise RuntimeError(theme)
 html.write_text(source,encoding="utf-8")
+# Check identical actual image bytes, not only identical URLs.
+for theme,items in prizes.items():
+    hashes={}
+    for p in items:
+        url=p.get("url","")
+        if not url.startswith("assets/prizes/"): continue
+        path=Path(url)
+        if not path.exists(): continue
+        with Image.open(path) as im:
+            im=im.convert("RGB")
+            im.thumbnail((128,128))
+            digest=hashlib.sha256(im.tobytes()+str(im.size).encode()).hexdigest()
+        if digest in hashes:
+            note=f"{theme}: {hashes[digest]} and {p['g']} same photo pixels"
+            if note not in duplicates: duplicates.append(note)
+        else: hashes[digest]=p["g"]
 lines=["# Kuji image audit","",f"Themes: {len(prizes)}. Images cached this run: {changed}. Broken: {len(broken)}. Duplicate URLs: {len(duplicates)}.","","## Unavailable images"]
 lines += ["- "+ " / ".join(map(str,r)) for r in broken] or ["None"]
 lines += ["","## Duplicate photo sources"]
