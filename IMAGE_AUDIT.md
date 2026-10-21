@@ -1,0 +1,71 @@
+# Kuji image audit
+
+Themes: 19. Images cached this run: 193. Broken: 7. Duplicate URLs: 57.
+
+## Unavailable images
+- overPrizes / J / https://www.1999.co.jp/itbig111/11146160a.jpg / HTTP Error 404: Not Found
+- quintPrizes / E / https://www.suruga-ya.jp/database/pics/game/560240245.jpg / HTTP Error 403: Forbidden
+- quintPrizes / G / https://www.suruga-ya.jp/database/pics/game/560240245.jpg / HTTP Error 403: Forbidden
+- dressPrizes / C / https://www.goodsmileus.com/cdn/shop/files/101_2706a1e7-a30c-4d16-bd02-67a3f84a4328.jpg?v=1758737213&width=750 / HTTP Error 404: Not Found
+- dressPrizes / F / https://www.goodsmileus.com/cdn/shop/files/101_2706a1e7-a30c-4d16-bd02-67a3f84a4328.jpg?v=1758737213&width=750 / HTTP Error 404: Not Found
+- dressPrizes / H / https://www.goodsmileus.com/cdn/shop/files/101_2706a1e7-a30c-4d16-bd02-67a3f84a4328.jpg?v=1758737213&width=750 / HTTP Error 404: Not Found
+- bluePrizes / G / https://m.comics-art.co.kr/web/upload/NNEditor/20230725/mobile/2cd61920d19d40120d59dcc86f7d0230_1690257816.jpg / cannot identify image file <_io.BytesIO object at 0x7f9c0e92f510>
+
+## Duplicate photo sources
+- mikuPrizes: H and I same source URL
+- choonPrizes: H and I same source URL
+- pokemonPrizes: H and I same source URL
+- nikkePrizes: H and I same source URL
+- bearPrizes: H and I same source URL
+- bearPrizes: H and J same source URL
+- trickPrizes: H and I same source URL
+- stellPrizes: A and F same source URL
+- stellPrizes: A and G same source URL
+- stellPrizes: A and H same source URL
+- stellPrizes: I and J same source URL
+- stellPrizes: A and LAST same source URL
+- isekaiPrizes: B and E same source URL
+- isekaiPrizes: D and G same source URL
+- isekaiPrizes: D and H same source URL
+- isekaiPrizes: D and I same source URL
+- isekaiPrizes: F and J same source URL
+- isekaiPrizes: A and LAST same source URL
+- sanrioPrizes: I and J same source URL
+- sanrioPrizes: F and LAST same source URL
+- spicePrizes: A and E same source URL
+- spicePrizes: B and F same source URL
+- spicePrizes: C and G same source URL
+- spicePrizes: D and H same source URL
+- spicePrizes: B and LAST same source URL
+- frierenPrizes: F and G same source URL
+- frierenPrizes: E and H same source URL
+- frierenPrizes: F and I same source URL
+- frierenPrizes: D and J same source URL
+- frierenPrizes: A and LAST same source URL
+- rezeroPrizes: D and G same source URL
+- rezeroPrizes: E and H same source URL
+- rezeroPrizes: A and LAST same source URL
+- quintPrizes: D and F same source URL
+- quintPrizes: E and G same source URL
+- quintPrizes: D and H same source URL
+- quintPrizes: I and J same source URL
+- quintPrizes: A and LAST same source URL
+- dressPrizes: A and D same source URL
+- dressPrizes: B and E same source URL
+- dressPrizes: C and F same source URL
+- dressPrizes: A and G same source URL
+- dressPrizes: C and H same source URL
+- dressPrizes: A and LAST same source URL
+- demonPrizes: A and D same source URL
+- demonPrizes: B and E same source URL
+- demonPrizes: C and F same source URL
+- demonPrizes: C and G same source URL
+- demonPrizes: C and H same source URL
+- demonPrizes: A and LAST same source URL
+- jujutsuPrizes: D and F same source URL
+- jujutsuPrizes: E and G same source URL
+- jujutsuPrizes: D and H same source URL
+- jujutsuPrizes: I and J same source URL
+- jujutsuPrizes: A and LAST same source URL
+- bluePrizes: H and I same source URL
+- bluePrizes: H and J same source URL
