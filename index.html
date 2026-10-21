@@ -1596,19 +1596,34 @@ const photoBackups={
  "라피 PalVerse Palé. 피규어":["https://www.prexhobby.com/cdn/shop/files/71d0eab3-854f-4582-8060-05bd8cedcb05.png?v=1772708541&width=1600"],
  "하야세 유우카 넨도로이드":["https://img2.animatetimes.com/2023/10/6a73a94f656e67c225d57750f54aa6ad6538d59e8ae0e9_45492704_06e344ae4367145a2d34024280d7050aefe08898.jpg"]
 };
-function photoError(img){
- const name=img.getAttribute('alt')||'';
- const fallbacks=photoBackups[name]||[];
- const idx=Number(img.dataset.fallbackIndex||0);
- if(idx<fallbacks.length && img.src!==fallbacks[idx]){
-   img.dataset.fallbackIndex=String(idx+1);
-   img.src=fallbacks[idx];
-   return;
+/* V37: retry remote photos via image proxy, then original and backup URLs.
+   A broken URL should not silently show an empty card. */
+function kujiProxy(url){
+ if(!url || !/^https?:\/\//i.test(url))return url;
+ return 'https://wsrv.nl/?url='+encodeURIComponent(url)+'&w=440&h=380&fit=contain&output=webp';
+}
+function photoCandidates(p){
+ const raw=picture(p), extra=photoBackups[p.name]||[];
+ const all=[raw,...extra],result=[];
+ for(const u of all){
+   if(!u)continue;
+   if(/^https?:\/\//i.test(u)){result.push(kujiProxy(u),u);}
+   else result.push(u);
  }
+ return [...new Set(result)];
+}
+function photoError(img){
+ let list=[];try{list=JSON.parse(decodeURIComponent(img.dataset.photoCandidates||''))}catch(e){}
+ const next=Number(img.dataset.photoIndex||0)+1;
+ if(next<list.length){img.dataset.photoIndex=String(next);img.src=list[next];return;}
  img.style.display='none';
  if(img.nextElementSibling)img.nextElementSibling.style.display='flex';
 }
-function imgTag(p){return `<div class="imgbox"><img src="${picture(p)}" alt="${p.name}" loading="lazy" onerror="photoError(this)"><div class="missing" style="display:none">이미지를 불러오지 못했어요.<br>📷 사진 추가로 등록 가능</div></div>`}
+function imgTag(p){
+ const candidates=photoCandidates(p),src=candidates[0]||'';
+ const safe=t=>String(t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+ return '<div class="imgbox"><img src="'+safe(src)+'" alt="'+safe(p.name)+'" data-photo-candidates="'+safe(encodeURIComponent(JSON.stringify(candidates)))+'" data-photo-index="0" referrerpolicy="no-referrer" loading="lazy" decoding="async" onerror="photoError(this)"><div class="missing" style="display:none">사진 서버 연결에 실패했어요.<br>📷 사진 추가로 등록 가능</div></div>';
+}
 function render(){
  const remain=slots.filter(s=>!s.used).length;
  const paid=draws.filter(x=>x!==prizes.length-1).length;
