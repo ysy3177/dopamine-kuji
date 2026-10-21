@@ -1,29 +1,15 @@
 # Kuji image audit
 
-Themes: 19. Images cached this run: 19. Broken: 3. Duplicate URLs: 37.
+Themes: 19. Images cached this run: 18. Broken: 2. Duplicate URLs: 24.
 
 ## Unavailable images
-- pokemonPrizes / I / https://ichiba-japan.com/cdn/shop/products/pikachu-number025-mini-decoration-collage-sticker-cafe-sticker-pokemon-center-729801_1200x1200.jpg?v=1695480726 / HTTP Error 403: Forbidden
 - dressPrizes / LAST / https://toycoin.com.sg/cdn/shop/files/shizuku01_702dff97-74a8-48ff-8200-1620c6c4951d.jpg?v=1770163909 / HTTP Error 404: Not Found
 - bluePrizes / G / https://m.comics-art.co.kr/web/upload/NNEditor/20230725/mobile/2cd61920d19d40120d59dcc86f7d0230_1690257816.jpg / Product page lacks og:image
 
 ## Duplicate photo sources
 - mikuPrizes: H and I same photo pixels
-- choonPrizes: H and I same photo pixels
-- bearPrizes: H and I same photo pixels
-- bearPrizes: H and J same photo pixels
 - trickPrizes: H and I same photo pixels
-- stellPrizes: A and F same photo pixels
-- stellPrizes: A and G same photo pixels
-- stellPrizes: A and H same photo pixels
 - stellPrizes: I and J same photo pixels
-- stellPrizes: A and LAST same photo pixels
-- isekaiPrizes: B and E same photo pixels
-- isekaiPrizes: D and G same photo pixels
-- isekaiPrizes: D and H same photo pixels
-- isekaiPrizes: D and I same photo pixels
-- isekaiPrizes: F and J same photo pixels
-- isekaiPrizes: A and LAST same photo pixels
 - sanrioPrizes: I and J same photo pixels
 - sanrioPrizes: F and LAST same photo pixels
 - spicePrizes: A and E same photo pixels
