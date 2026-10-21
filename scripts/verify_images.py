@@ -3,6 +3,14 @@
 import json,re,os,io,hashlib,urllib.request,urllib.error,collections
 from pathlib import Path
 from PIL import Image,UnidentifiedImageError
+from html.parser import HTMLParser
+from urllib.parse import urljoin
+class OGImage(HTMLParser):
+    def __init__(self): super().__init__(); self.image=None
+    def handle_starttag(self,tag,attrs):
+        a=dict(attrs)
+        if tag=='meta' and a.get('property') in ('og:image','og:image:secure_url') and a.get('content') and not self.image: self.image=a['content']
+
 
 html=Path("index.html")
 source=html.read_text(encoding="utf-8")
@@ -33,8 +41,16 @@ for theme,items in prizes.items():
             req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 (compatible; KujiImageAudit/1.0)","Accept":"image/avif,image/webp,image/png,image/jpeg,image/*;q=0.8"})
             with urllib.request.urlopen(req,timeout=15) as resp:
                 data=resp.read(9*1024*1024)
-            with Image.open(io.BytesIO(data)) as im:
-                im.verify()
+            try:
+                with Image.open(io.BytesIO(data)) as im: im.verify()
+            except (UnidentifiedImageError,OSError):
+                if b'<html' not in data[:3000].lower() and b'<!doctype' not in data[:3000].lower(): raise
+                parser=OGImage();parser.feed(data.decode('utf-8','replace'))
+                if not parser.image: raise ValueError('Product page lacks og:image')
+                actual=urljoin(url,parser.image)
+                req2=urllib.request.Request(actual,headers={'User-Agent':'Mozilla/5.0','Accept':'image/*'})
+                with urllib.request.urlopen(req2,timeout=15) as resp2: data=resp2.read(9*1024*1024)
+                with Image.open(io.BytesIO(data)) as im: im.verify()
             with Image.open(io.BytesIO(data)) as im:
                 im=im.convert("RGB")
                 if min(im.size)<90:raise ValueError("too small")
