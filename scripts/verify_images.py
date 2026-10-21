@@ -9,7 +9,7 @@ class OGImage(HTMLParser):
     def __init__(self): super().__init__(); self.image=None
     def handle_starttag(self,tag,attrs):
         a=dict(attrs)
-        if tag=='meta' and a.get('property') in ('og:image','og:image:secure_url') and a.get('content') and not self.image: self.image=a['content']
+        if tag=='meta' and (a.get('property') in ('og:image','og:image:secure_url','twitter:image') or a.get('name') in ('twitter:image','twitter:image:src')) and a.get('content') and not self.image: self.image=a['content']
 
 
 html=Path("index.html")
