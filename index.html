@@ -1306,21 +1306,21 @@ const sanrioPrizes=[
   },
   {
     "g": "F",
-    "name": "시나모롤 스탠더드 L 봉제인형",
+    "name": "산리오 캐릭터즈 타월 파우치 컬렉션",
     "count": 15,
-    "url": "https://item-shopping.c.yimg.jp/i/n/sanrio_n-2508-148431"
+    "url": "https://www.broadcastfantasia.com/cdn/shop/files/Group24.png?v=1748552727&width=1024"
   },
   {
     "g": "G",
-    "name": "마이멜로디 리본 프린세스 봉제인형",
+    "name": "산리오 캐릭터즈 삼각 미니 파우치",
     "count": 20,
-    "url": "https://kream-phinf.pstatic.net/MjAyNTA3MzFfMjQw/MDAxNzUzOTA5NDQ1ODMx.D70PARbkgrYe8Fy5Obo5SNChqt-t16kaUlfAtMvBq8wg.b_Py4vhUDr_zMXxvQEAL1YYPHs2IldoYDkRJH4dKmfcg.PNG/a_96908b51f11646de986f2cead1af3566.png"
+    "url": "https://image.rakuten.co.jp/krstlm/cabinet/c20201022tf01/185290_2.jpg"
   },
   {
     "g": "H",
-    "name": "폼폼푸린 스탠더드 S 봉제인형",
+    "name": "폼폼푸린 뼈다귀 파우치 키링",
     "count": 24,
-    "url": "https://cdn11.bigcommerce.com/s-89ffd/images/stencil/1280x1280/products/119755/419859/4550337103036_a6e81c6227685cefb71ea787d2ae6f75__11166.1666323164.jpg"
+    "url": "https://www.crank-in.net/img/db/262036032166443_1200.jpg"
   },
   {
     "g": "I",
@@ -1336,9 +1336,9 @@ const sanrioPrizes=[
   },
   {
     "g": "LAST",
-    "name": "시나모롤 스탠더드 L 봉제인형 (라스트원)",
+    "name": "산리오 캐릭터즈 자수 타월 파우치 8종 세트 (라스트원)",
     "count": 0,
-    "url": "https://item-shopping.c.yimg.jp/i/n/sanrio_n-2508-148431"
+    "url": "https://www.broadcastfantasia.com/cdn/shop/files/Group24.png?v=1748552727&width=1024"
   }
 ];
 const spicePrizes=[
@@ -1454,19 +1454,19 @@ const frierenPrizes=[
   },
   {
     "g": "H",
-    "name": "프리렌 캐릭터 미니 카드",
+    "name": "프리렌 캐릭터 아크릴 스탠드",
     "count": 24,
-    "url": "https://anime-store.jp/cdn/shop/files/4580805211451_001_1200x1200.jpg?v=1780371727"
+    "url": "https://image.biccamera.com/img/00000012416785_A01.jpg?sr.dh=600&sr.dw=600&sr.jqh=60&sr.mat=1"
   },
   {
     "g": "I",
-    "name": "프리렌 캐릭터 미니 카드 1매",
+    "name": "프리렌 아크릴 키홀더 1개",
     "count": 90,
-    "url": "https://anime-store.jp/cdn/shop/files/4580805211451_001_1200x1200.jpg?v=1780371727"
+    "url": "https://item-shopping.c.yimg.jp/i/n/ten-ten-store_ssnfrn-ggakky01"
   },
   {
     "g": "J",
-    "name": "프리렌 미니 포스트카드 1매",
+    "name": "프리렌 포스트카드 1매",
     "count": 130,
     "url": "https://anime-store.jp/cdn/shop/files/4580805211451_001_1200x1200.jpg?v=1780371727"
   },
@@ -1951,6 +1951,17 @@ function kujiProxy(url){
  if(!url || !/^https?:\/\//i.test(url))return url;
  return 'https://wsrv.nl/?url='+encodeURIComponent(url)+'&w=440&h=380&fit=contain&output=webp';
 }
+function kujiAudit(){
+ const collections={chi:chiPrizes,over:overPrizes,miku:mikuPrizes,choon:choonPrizes,poke:pokemonPrizes,nikke:nikkePrizes,blue:bluePrizes,bear:bearPrizes,trick:trickPrizes,stell:stellPrizes,isekai:isekaiPrizes,sanrio:sanrioPrizes,spice:spicePrizes,frieren:frierenPrizes,rezero:rezeroPrizes,quint:quintPrizes,dress:dressPrizes,demon:demonPrizes,jujutsu:jujutsuPrizes};
+ const duplicates=[];
+ for(const [theme,items] of Object.entries(collections)){
+  const seen=new Map();
+  for(const p of items){const u=p.url||image(p.n);if(seen.has(u))duplicates.push({theme,grades:seen.get(u)+'/'+p.g,url:u});else seen.set(u,p.g)}
+ }
+ console.table(duplicates);
+ return duplicates;
+}
+window.kujiAudit=kujiAudit;
 function photoCandidates(p){
  const raw=picture(p), extra=photoBackups[p.name]||[];
  const all=[raw,...extra],result=[];
