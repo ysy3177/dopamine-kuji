@@ -1,71 +1,62 @@
 # Kuji image audit
 
-Themes: 19. Images cached this run: 193. Broken: 7. Duplicate URLs: 57.
+Themes: 19. Images cached this run: 4. Broken: 3. Duplicate URLs: 52.
 
 ## Unavailable images
-- overPrizes / J / https://www.1999.co.jp/itbig111/11146160a.jpg / HTTP Error 404: Not Found
-- quintPrizes / E / https://www.suruga-ya.jp/database/pics/game/560240245.jpg / HTTP Error 403: Forbidden
-- quintPrizes / G / https://www.suruga-ya.jp/database/pics/game/560240245.jpg / HTTP Error 403: Forbidden
-- dressPrizes / C / https://www.goodsmileus.com/cdn/shop/files/101_2706a1e7-a30c-4d16-bd02-67a3f84a4328.jpg?v=1758737213&width=750 / HTTP Error 404: Not Found
-- dressPrizes / F / https://www.goodsmileus.com/cdn/shop/files/101_2706a1e7-a30c-4d16-bd02-67a3f84a4328.jpg?v=1758737213&width=750 / HTTP Error 404: Not Found
-- dressPrizes / H / https://www.goodsmileus.com/cdn/shop/files/101_2706a1e7-a30c-4d16-bd02-67a3f84a4328.jpg?v=1758737213&width=750 / HTTP Error 404: Not Found
-- bluePrizes / G / https://m.comics-art.co.kr/web/upload/NNEditor/20230725/mobile/2cd61920d19d40120d59dcc86f7d0230_1690257816.jpg / cannot identify image file <_io.BytesIO object at 0x7f9c0e92f510>
+- dressPrizes / F / https://www.goodsmile.com/en/product/11628/Nendoroid%20Doll%20Marin%20Kitagawa / Product page lacks og:image
+- dressPrizes / H / https://www.goodsmile.com/en/product/36099/Nendoroid%2BMarin%2BKitagawa%2BSwimsuit%2BVer. / Product page lacks og:image
+- bluePrizes / G / https://m.comics-art.co.kr/web/upload/NNEditor/20230725/mobile/2cd61920d19d40120d59dcc86f7d0230_1690257816.jpg / Product page lacks og:image
 
 ## Duplicate photo sources
-- mikuPrizes: H and I same source URL
-- choonPrizes: H and I same source URL
-- pokemonPrizes: H and I same source URL
-- nikkePrizes: H and I same source URL
-- bearPrizes: H and I same source URL
-- bearPrizes: H and J same source URL
-- trickPrizes: H and I same source URL
-- stellPrizes: A and F same source URL
-- stellPrizes: A and G same source URL
-- stellPrizes: A and H same source URL
-- stellPrizes: I and J same source URL
-- stellPrizes: A and LAST same source URL
-- isekaiPrizes: B and E same source URL
-- isekaiPrizes: D and G same source URL
-- isekaiPrizes: D and H same source URL
-- isekaiPrizes: D and I same source URL
-- isekaiPrizes: F and J same source URL
-- isekaiPrizes: A and LAST same source URL
-- sanrioPrizes: I and J same source URL
-- sanrioPrizes: F and LAST same source URL
-- spicePrizes: A and E same source URL
-- spicePrizes: B and F same source URL
-- spicePrizes: C and G same source URL
-- spicePrizes: D and H same source URL
-- spicePrizes: B and LAST same source URL
-- frierenPrizes: F and G same source URL
-- frierenPrizes: E and H same source URL
-- frierenPrizes: F and I same source URL
-- frierenPrizes: D and J same source URL
-- frierenPrizes: A and LAST same source URL
-- rezeroPrizes: D and G same source URL
-- rezeroPrizes: E and H same source URL
-- rezeroPrizes: A and LAST same source URL
-- quintPrizes: D and F same source URL
-- quintPrizes: E and G same source URL
-- quintPrizes: D and H same source URL
-- quintPrizes: I and J same source URL
-- quintPrizes: A and LAST same source URL
-- dressPrizes: A and D same source URL
-- dressPrizes: B and E same source URL
-- dressPrizes: C and F same source URL
-- dressPrizes: A and G same source URL
-- dressPrizes: C and H same source URL
-- dressPrizes: A and LAST same source URL
-- demonPrizes: A and D same source URL
-- demonPrizes: B and E same source URL
-- demonPrizes: C and F same source URL
-- demonPrizes: C and G same source URL
-- demonPrizes: C and H same source URL
-- demonPrizes: A and LAST same source URL
-- jujutsuPrizes: D and F same source URL
-- jujutsuPrizes: E and G same source URL
-- jujutsuPrizes: D and H same source URL
-- jujutsuPrizes: I and J same source URL
-- jujutsuPrizes: A and LAST same source URL
-- bluePrizes: H and I same source URL
-- bluePrizes: H and J same source URL
+- mikuPrizes: H and I same photo pixels
+- choonPrizes: H and I same photo pixels
+- pokemonPrizes: H and I same photo pixels
+- nikkePrizes: H and I same photo pixels
+- bearPrizes: H and I same photo pixels
+- bearPrizes: H and J same photo pixels
+- trickPrizes: H and I same photo pixels
+- stellPrizes: A and F same photo pixels
+- stellPrizes: A and G same photo pixels
+- stellPrizes: A and H same photo pixels
+- stellPrizes: I and J same photo pixels
+- stellPrizes: A and LAST same photo pixels
+- isekaiPrizes: B and E same photo pixels
+- isekaiPrizes: D and G same photo pixels
+- isekaiPrizes: D and H same photo pixels
+- isekaiPrizes: D and I same photo pixels
+- isekaiPrizes: F and J same photo pixels
+- isekaiPrizes: A and LAST same photo pixels
+- sanrioPrizes: I and J same photo pixels
+- sanrioPrizes: F and LAST same photo pixels
+- spicePrizes: A and E same photo pixels
+- spicePrizes: B and F same photo pixels
+- spicePrizes: C and G same photo pixels
+- spicePrizes: B and LAST same photo pixels
+- frierenPrizes: F and G same photo pixels
+- frierenPrizes: E and H same photo pixels
+- frierenPrizes: F and I same photo pixels
+- frierenPrizes: D and J same photo pixels
+- frierenPrizes: A and LAST same photo pixels
+- rezeroPrizes: D and G same photo pixels
+- rezeroPrizes: E and H same photo pixels
+- rezeroPrizes: A and LAST same photo pixels
+- quintPrizes: D and F same photo pixels
+- quintPrizes: D and H same photo pixels
+- quintPrizes: I and J same photo pixels
+- quintPrizes: A and LAST same photo pixels
+- dressPrizes: B and E same photo pixels
+- dressPrizes: D and G same photo pixels
+- dressPrizes: D and LAST same photo pixels
+- demonPrizes: A and D same photo pixels
+- demonPrizes: B and E same photo pixels
+- demonPrizes: C and F same photo pixels
+- demonPrizes: C and G same photo pixels
+- demonPrizes: C and H same photo pixels
+- demonPrizes: A and LAST same photo pixels
+- jujutsuPrizes: D and F same photo pixels
+- jujutsuPrizes: E and G same photo pixels
+- jujutsuPrizes: D and H same photo pixels
+- jujutsuPrizes: I and J same photo pixels
+- jujutsuPrizes: A and LAST same photo pixels
+- bluePrizes: H and I same photo pixels
+- bluePrizes: H and J same photo pixels
