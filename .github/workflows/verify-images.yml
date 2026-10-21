@@ -6,6 +6,9 @@ on:
       - index.html
       - scripts/verify_images.py
       - .github/workflows/verify-images.yml
+concurrency:
+  group: kuji-image-audit-main
+  cancel-in-progress: false
 permissions:
   contents: write
 jobs:
@@ -25,7 +28,8 @@ jobs:
           git add index.html IMAGE_AUDIT.md assets/prizes/
           if ! git diff --cached --quiet; then
             git commit -m "Cache verified kuji merchandise photos and image audit"
-            git push
+            git pull --rebase origin main
+            git push origin HEAD:main
           fi
       - name: Enforce no broken photos or reused URLs
         run: |
