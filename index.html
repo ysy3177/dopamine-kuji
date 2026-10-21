@@ -1890,10 +1890,44 @@ const bluePrizes=[
 ];
 let savedPhotos={};try{savedPhotos=JSON.parse(localStorage.getItem('kujiPhotosV4')||'{}')}catch(e){}
 let mode='chi',prizes=chiPrizes,slots=[],queue=0,draws=[],active=null,finished=false,painting=false,moves=0;let selectionCount=1,selectedTickets=[],batchTickets=[];
+/* Each theme keeps an independent ticket box until page reload.
+   A new box resets only the currently selected theme. */
+const themeBoxes=new Map();
+function snapshotTheme(){if(slots.length)themeBoxes.set(mode,{
+ slots:slots.map(s=>({p:s.p,used:s.used})),
+ draws:[...draws],queue,finished:false,
+ selectionCount,selectedTickets:[...selectedTickets]
+});}
+function restoreTheme(key){
+ const state=themeBoxes.get(key);
+ if(!state){start();return;}
+ slots=state.slots.map(s=>({...s}));
+ draws=[...state.draws];queue=state.queue||0;active=null;finished=false;
+ selectionCount=state.selectionCount||1;
+ selectedTickets=(state.selectedTickets||[]).filter(i=>slots[i]&&!slots[i].used).slice(0,selectionCount);
+ batchTickets=[];render();
+}
+function selectionSound(){
+ const ac=initAudio();if(!ac)return;
+ try{
+  const now=ac.currentTime;
+  for(const [offset,hz] of [[0,720],[.065,1040]]){
+   const osc=ac.createOscillator(),gain=ac.createGain();
+   osc.type='sine';osc.frequency.setValueAtTime(hz,now+offset);
+   osc.frequency.exponentialRampToValueAtTime(hz*1.13,now+offset+.055);
+   gain.gain.setValueAtTime(.0001,now+offset);
+   gain.gain.exponentialRampToValueAtTime(.055,now+offset+.009);
+   gain.gain.exponentialRampToValueAtTime(.0001,now+offset+.105);
+   osc.connect(gain);gain.connect(ac.destination);
+   osc.start(now+offset);osc.stop(now+offset+.11);
+  }
+ }catch(e){}
+}
+
 function picture(p){return p.url||image(p.n)}
 function changeMode(next){
  if(active!==null)return;
- selectedTickets=[];mode=next;
+ snapshotTheme();selectedTickets=[];mode=next;
  prizes=next==='chi'?chiPrizes:next==='over'?overPrizes:next==='miku'?mikuPrizes:next==='choon'?choonPrizes:next==='poke'?pokemonPrizes:next==='nikke'?nikkePrizes:next==='blue'?bluePrizes:next==='bear'?bearPrizes:next==='trick'?trickPrizes:next==='stell'?stellPrizes:next==='isekai'?isekaiPrizes:next==='sanrio'?sanrioPrizes:next==='spice'?spicePrizes:next==='frieren'?frierenPrizes:next==='rezero'?rezeroPrizes:next==='quint'?quintPrizes:next==='dress'?dressPrizes:next==='demon'?demonPrizes:jujutsuPrizes;
  document.body.classList.toggle('overlord',next==='over');
  document.body.classList.toggle('miku',next==='miku');
@@ -1930,18 +1964,15 @@ function changeMode(next){
  sanrio:['🎀 귀여움이 가득한 산리오 랜덤 상점! 시나모롤, 쿠로미, 마이멜로디와 오늘의 포근한 행운을 찾아 봐.','산리오<br><small>300 TICKETS KUJI</small>','🎀 산리오 쿠지 · 1회 13,000원','🎀 산리오 굿즈'],
  isekai:['🎤 현실을 넘어 판타지 무대로! 이세계아이돌 멤버들과 함께 특별한 최애 굿즈를 만나는 쿠지.','이세계아이돌<br><small>300 TICKETS KUJI</small>','🎤 이세계아이돌 쿠지 · 1회 13,000원','🎤 이세계아이돌 굿즈'],
  stell:['🌟 별빛을 따라 펼쳐지는 스텔라이브 쿠지! 응원봉부터 포토카드까지 반짝이는 순간을 한 장에 담아 봐.','스텔라이브<br><small>300 TICKETS KUJI</small>','🌟 스텔라이브 쿠지 · 1회 13,000원','🌟 스텔라이브 굿즈'],
- isekai:['🎤 이세계아이돌 300장 대형 쿠지','이세계아이돌<br><small>300 TICKETS KUJI</small>','🎤 이세계아이돌 쿠지 · 1회 13,000원','🎤 이세계아이돌 굿즈'],
- sanrio:['🎀 산리오 300장 대형 쿠지','산리오<br><small>300 TICKETS KUJI</small>','🎀 산리오 쿠지 · 1회 13,000원','🎀 산리오 굿즈'],
- spice:['🍎 늑대와 향신료 300장 대형 쿠지','늑대와 향신료<br><small>300 TICKETS KUJI</small>','🍎 늑대와 향신료 쿠지 · 1회 13,000원','🍎 늑대와 향신료 굿즈'],
- frieren:['🪄 장송의 프리렌 300장 대형 쿠지','장송의 프리렌<br><small>300 TICKETS KUJI</small>','🪄 장송의 프리렌 쿠지 · 1회 13,000원','🪄 장송의 프리렌 굿즈']
+
  };
  const t=labels[next];$('themeIntro').textContent=t[0];$('subtitle').textContent=t[0];$('boxMark').innerHTML=t[1];$('boxSub').textContent=t[2];$('lineupTitle').textContent=t[3];
- start();
+ restoreTheme(next);
 }
 
 const $=id=>document.getElementById(id);
 function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function start(){let deck=shuffle(prizes.slice(0,-1).flatMap((p,i)=>Array(p.count).fill(i)));slots=deck.map((p,i)=>({p,used:false}));draws=[];queue=0;active=null;finished=false;selectedTickets=[];batchTickets=[];selectionCount=1;render()}
+function start(){themeBoxes.delete(mode);let deck=shuffle(prizes.slice(0,-1).flatMap((p,i)=>Array(p.count).fill(i)));slots=deck.map((p,i)=>({p,used:false}));draws=[];queue=0;active=null;finished=false;selectedTickets=[];batchTickets=[];selectionCount=1;render()}
 const photoBackups={
  "피카츄 포켓몬센터 앉은 봉제인형":["https://www.pokemoncenter-online.com/a/img/item/4521329333687/L/cdf61577f2a84bb764e3e7f767c71e931e4f494bafd593616a966b2320f33cda.jpg"],
  "아니스 넨도로이드 피규어":["https://hobby-genki.com/200657-thickbox_default/nendoroid-anis-goddess-of-victory-nikke-figure.jpg"],
@@ -2014,9 +2045,9 @@ function render(){
  $('quickTen').classList.toggle('mode-active',selectionCount===10);
 
 }
-function chooseMode(n){if(active!==null)return;selectionCount=n;selectedTickets=[];render();$('drawStation').scrollIntoView({behavior:'smooth',block:'start'})}
-function selectTicket(i){if(active!==null||slots[i].used)return;const idx=selectedTickets.indexOf(i);if(idx>=0)selectedTickets.splice(idx,1);else{if(selectedTickets.length>=Math.min(selectionCount,slots.filter(s=>!s.used).length))return;selectedTickets.push(i)}render()}
-function beginSelected(){const remain=slots.filter(s=>!s.used).length;if(active!==null||selectedTickets.length!==Math.min(selectionCount,remain)||!remain)return;const ids=[...selectedTickets];selectedTickets=[];if(ids.length===1)pick(ids[0]);else openBatch(ids)}
+function chooseMode(n){if(active!==null)return;selectionSound();selectionCount=n;selectedTickets=[];render();$('drawStation').scrollIntoView({behavior:'smooth',block:'start'})}
+function selectTicket(i){if(active!==null||slots[i].used)return;const idx=selectedTickets.indexOf(i);if(idx>=0)selectedTickets.splice(idx,1);else{if(selectedTickets.length>=Math.min(selectionCount,slots.filter(s=>!s.used).length))return;selectedTickets.push(i)}selectionSound();render()}
+function beginSelected(){const remain=slots.filter(s=>!s.used).length;if(active!==null||selectedTickets.length!==Math.min(selectionCount,remain)||!remain)return;const ids=[...selectedTickets];selectedTickets=[];selectionSound();if(ids.length===1)pick(ids[0]);else openBatch(ids)}
 function randomPick(){const ids=slots.map((s,i)=>s.used?-1:i).filter(i=>i>=0);if(ids.length)pick(ids[Math.floor(Math.random()*ids.length)])}
 function openBatch(ids){batchTickets=ids;active=ids[0];$('modal').classList.add('batch-mode');$('scratchArea').style.display='block';$('prizeGrade').textContent='10연';$('prizeImage').style.display='none';$('prizeName').textContent='선택한 '+ids.length+'장의 종이를 한 번에 뜯어 봐!';$('batchResult').innerHTML='';$('batchResult').style.display='none';$('modal').classList.add('show');document.body.style.overflow='hidden';$('close').disabled=true;$('close').textContent='당첨 결과 받기 💝';$('scratchStatus').textContent='왼쪽에서 오른쪽으로 쭉 당겨 한 번에 개봉!';setupCanvas();render()}
 function pick(i){if(active!==null||slots[i].used)return;$('modal').classList.remove('batch-mode','batch-revealed');$('scratchArea').style.display='block';batchTickets=[];$('batchResult').style.display='none';$('close').textContent='상품 받기 💝';active=i;const p=prizes[slots[i].p];$('prizeGrade').textContent=p.g+'상';$('prizeImage').src=picture(p);$('prizeImage').onerror=function(){this.style.display='none';$('prizeName').textContent=p.name+' (사진을 불러오지 못함)'};$('prizeImage').style.display='block';$('prizeName').textContent=p.name;$('modal').classList.add('show');document.body.style.overflow='hidden';$('close').disabled=true;$('scratchStatus').textContent='👉 왼쪽 끝을 잡고 오른쪽으로 당겨 봐!';setupCanvas();render()}
