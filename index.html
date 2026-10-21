@@ -571,6 +571,15 @@ body{background:#e9e7e6}
 .bear .pasted-slip{background:linear-gradient(135deg,#fff,#f3dfbf 18%,#ddbb89 90%);color:#765235;border-color:#bb9162}
 .bear .modal-card{background:#fffaf1;border-color:#d1aa76;color:#5d4933}
 .bear .peel{background:repeating-linear-gradient(135deg,#f2dfc1 0 13px,#fff7e8 13px 26px)!important}
+
+/* V31: readable prize labels including long LAST ONE figure names */
+.lineup-panel .product,.lineup-panel .product:last-child{min-height:190px!important;height:auto!important;overflow:visible!important;align-items:stretch}
+.lineup-panel .prize-photo{height:auto!important;min-height:190px!important;overflow:visible!important;justify-content:center!important;padding:38px 12px 18px!important;box-sizing:border-box}
+.lineup-panel .prize-photo .name,.lineup-panel .product .name{display:block!important;flex:none!important;min-height:0!important;height:auto!important;max-height:none!important;overflow:visible!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:keep-all!important;line-height:1.55!important;font-size:12px!important;text-align:center!important;padding:9px 4px 6px!important}
+.lineup-panel .prize-photo .imgbox{flex:0 0 auto;min-height:95px;max-width:175px;margin:0 auto}
+.lineup-panel .prize-photo img{display:block;max-height:125px!important;height:125px!important;object-fit:contain}
+.lineup-panel .prize-stock{min-height:190px}
+@media(max-width:600px){.lineup-panel .product,.lineup-panel .product:last-child{grid-template-columns:minmax(128px,40%) minmax(0,1fr)!important}.lineup-panel .prize-photo{padding:35px 7px 15px!important}.lineup-panel .prize-photo .name{font-size:11px!important}}
 </style></head><body><div class="kiosk-shell"><div class="kiosk-top"><span class="live-dot"></span><b>도파민 쿠지 · DOPAMINE KUJI</b><span class="station-id">DIGITAL LOTTERY EXPERIENCE <span id="stationClock">● READY</span></span><span class="station-no">NO. 001</span></div><div class="wrap"><header><div class="pill">FAN-MADE · DIGITAL ICHIBAN KUJI</div><h1 id="mainTitle">도파민 쿠지</h1><div class="theme-switch"><button id="chiMode" class="theme-btn active">🐰 먼작귀 쿠지</button><button id="overMode" class="theme-btn">🦇 오버로드 쿠지</button><button id="mikuMode" class="theme-btn">🎤 하츠네 미쿠 쿠지</button><button id="choonMode" class="theme-btn">🐱 춘식이 쿠지</button><button id="pokeMode" class="theme-btn">🌿 포켓몬 쿠지</button><button id="nikkeMode" class="theme-btn">🐰 니케 쿠지</button><button id="blueMode" class="theme-btn">💠 블루 아카이브 쿠지</button><button id="bearMode" class="theme-btn">🐻 농담곰 쿠지</button></div><div class="sub" id="subtitle">🍜 모두 함께 라멘! · 종이를 페리페리 뜯어서 당첨 결과를 확인해 봐</div></header><div class="kiosk-steps"><span class="current">01 <b>상품 확인</b></span><span>02 <b>티켓 선택</b></span><span>03 <b>종이 개봉</b></span><span>04 <b>당첨권 부착</b></span></div><div class="kiosk-hero"><div><span class="hero-eyebrow">LIMITED PRIZE COLLECTION</span><h2>오늘의 행운을<br><em>직접 뽑아보세요.</em></h2><p>상품을 확인하고 마음에 드는 티켓을 골라보세요.<br>뽑은 쿠지 종이는 실제 매장처럼 회수판에 붙어요.</p></div><div class="hero-action"><span class="hero-price-label">1 PLAY</span><strong>₩13,000</strong><div class="quick-draw"><button id="quickOne" class="quick-btn">🎟️ 1회 뽑기 <small>13,000원</small></button><button id="quickTen" class="quick-btn ten">✨ 10연 뽑기 <small>130,000원</small></button></div><button id="jumpDraw" class="hero-cta">직접 티켓 고르기 <span>↗</span></button><small>가상 쿠지 · 실제 결제 없음</small></div></div><div class="actions sound-actions" style="margin:12px 0"><button id="soundToggle" class="btn ghost" aria-pressed="true">🔊 생생한 종이 소리 켜짐</button></div><div class="stats"><div class="stat">남은 쿠지<strong id="left">80</strong></div><div class="stat">뽑은 횟수<strong id="draws">0</strong></div><div class="stat">가상 사용 금액 (1회 13,000원)<strong id="spent">0원</strong></div></div><section class="panel lineup-panel"><h2><span id="lineupTitle">PRIZE LINEUP · 상품 라인업</span> <small style="font-weight:normal;font-size:12px">(이미지: 반다이 공식 보도자료)</small></h2><p class="notice">니케와 블루 아카이브는 실물 피규어 상품 사진을 사용하며 일부 하위 등급은 게임용 컬렉션입니다. 포켓몬 테마는 실제 출시된 봉제인형 상품 사진을 사용합니다(등급 및 라스트원 지정은 게임용 구성). 춘식이 테마는 실제 춘수산 상품 사진과 공식 테마 사진을 사용합니다(일부 등급은 테마 대표 사진). 미쿠 상품은 FuRyu 공식 상품 사진을 사용합니다. 공식 이미지 링크를 먼저 시도합니다. 사진이 안 뜨는 상품은 아래에서 사진을 선택하면 이 브라우저에 저장됩니다.</p><div class="uploadbar"><label>📷 상품 사진 직접 추가<input id="photoUpload" type="file" accept="image/*"></label><select id="photoSelect" aria-label="사진을 적용할 상품"></select><button class="btn ghost" id="clearPhotos">저장 사진 지우기</button></div><div class="products" id="products"></div></section><section class="panel draw-panel" id="drawStation"><div class="draw-station-head"><span class="draw-indicator">● NOW PLAYING</span><span>STATION 01 / TICKET DISPENSER</span></div><h2>TICKET DRAW <small>티켓 선택</small></h2><div class="draw-intro">STEP 02 <b>원하는 티켓을 선택하세요</b><span>종이를 직접 뜯고 당첨 상품을 확인할 수 있어요.</span></div><div class="box-art"><div class="box-mark" id="boxMark">ちいかわ<br><small>みんなでラーメン</small></div><div class="box-sub" id="boxSub">🎟️ 종이 쿠지 80장 · 1회 13,000원</div></div><div class="actions"><button class="btn" id="random">🎟️ 1장 선택</button><button class="btn secondary" id="ten">✨ 10장 선택</button><button class="btn ghost" id="reset">🔄 새 쿠지 상자</button></div><p class="tip" id="tip">원하는 티켓을 직접 클릭해 봐! 뜯어서 확인할 수 있어 ✨</p><div class="ticket-tray"><div class="tray-title"><span>◈</span> SELECT YOUR LUCKY TICKET <span>◈</span></div><div class="tickets" id="tickets"></div><div class="selection-bar"><b id="selectionStatus">0 / 1장 선택</b><button id="confirmSelection" class="btn" disabled>선택한 종이 뜯기 →</button></div></div></section><section class="panel"><h2>MY COLLECTION · 당첨 컬렉션</h2><div class="history" id="history">아직 뽑은 굿즈가 없어!</div></section><p class="source">니케 앨리스 넨도로이드: <a href="https://www.goodsmile.com/en/product/1138631/Nendoroid%2BAlice" target="_blank" rel="noopener">Good Smile 공식</a> · 블루 아카이브 아로나 넨도로이드: <a href="https://www.goodsmile.com/en/product/12646/Nendoroid%20Arona" target="_blank" rel="noopener">Good Smile 공식</a> · 포켓몬 치코리타 실제 상품 참고: <a href="https://www.pokemoncenter-online.com/4521329338385.html" target="_blank" rel="noopener">포켓몬센터 치코리타 봉제인형</a> · 춘식이 상품 참고: <a href="https://www.kakaocorp.com/page/detail/11960" target="_blank" rel="noopener">카카오 공식 춘수산 굿즈 소개</a> · 미쿠 실제 상품 사진: <a href="https://www.furyu.jp/news/2026/02/furyukuji/citrusmiku/" target="_blank" rel="noopener">FuRyu 공식 시트러스 미쿠 쿠지</a> · 오버로드 상품 사진: <a href="https://1kuji.com/products/overlord" target="_blank">반다이 이치방쿠지 공식 상품</a> · 이미지 제공처: 반다이 온라인 및 상품 소개 매체<br>실제 상품 사진은 BANDAI SPIRITS가 공개한 <a href="https://www.atpress.ne.jp/news/417831" target="_blank" rel="noopener">「치이카와 ~모두 함께 라멘~」 보도자료</a>의 외부 이미지를 사용해요.<br>인터넷 연결 시 사진이 표시되며, 이미지 제공 사이트 정책에 따라 일부 사진이 보이지 않을 수 있어요. 외부 이미지가 차단되면 사진 추가 기능으로 직접 등록할 수 있어요.<br>실제 판매·결제·상품 배송과 무관한 비공식 개인용 시뮬레이터입니다. 등급별 수량은 게임용으로 구성했어요.</p></div><div class="kiosk-footer"><span>KUJI STATION · FAN EXPERIENCE</span><span>THANK YOU FOR PLAYING</span></div></div>
 <div id="rareCelebration" class="rare-celebration" aria-live="polite"><div class="rare-confetti" id="rareConfetti"></div><div class="rare-message"><span>✦ ULTRA RARE ✦</span><strong id="rareTitle">A상 당첨!</strong><p id="rareSubtitle">최고 등급 등장!</p><button type="button" id="rareDismiss">당첨 결과 보기 →</button></div></div><div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="쿠지 개봉"><div class="modal-card"><h2>🎀 페리페리 타임! 🎀</h2><div class="modal-note">왼쪽 손잡이를 잡고 오른쪽으로 쭉 당겨서 종이를 뜯어 봐!</div><div class="scratch-wrap" id="scratchArea"><div class="under"><strong id="prizeGrade">?</strong><img id="prizeImage" alt="당첨 굿즈 사진"><small id="prizeName"></small></div><div id="peel" class="peel"><span class="peel-caption">🎟️ 왼쪽에서 오른쪽으로<br>페리페리 뜯기!</span><span class="peel-tab">잡고 당기기 ▶</span></div></div><div id="batchResult" class="batch-results" style="display:none"></div><div class="modal-note" id="scratchStatus">👉 왼쪽 끝을 잡고 오른쪽으로 당겨 봐!</div><div class="actions"><button class="btn ghost" id="reveal">한 번에 뜯기</button><button class="btn" id="close" disabled>상품 받기 💝</button></div></div></div>
 <script>
@@ -632,9 +641,9 @@ const overPrizes=[
   },
   {
     "g": "LAST",
-    "name": "알베도 넨도로이드 #642 (게임용 라스트원)",
+    "name": "알베도 1/7 스케일 피규어 (게임용 라스트원)",
     "count": 0,
-    "url": "https://leannesanimeandcollectables.com/cdn/shop/files/Albedo4.jpg?v=1731415449"
+    "url": "https://d89889xojlqhy.cloudfront.net/images/editor/2026-03-06/eba80a4bd7bbe6ac91be3a3f7d7715f769a9fe3fab9bc.webp"
   }
 ];
 const mikuPrizes=[
@@ -690,27 +699,27 @@ const mikuPrizes=[
 const choonPrizes=[
   {
     "g": "A",
+    "name": "춘수산 랜덤 피규어 풀세트 (A상)",
+    "count": 2,
+    "url": "https://img1.kakaocdn.net/thumb/P750x750%402x.fwebp.q82/?fname=https%3A%2F%2Fst.kakaocdn.net%2Fshoppingstore%2Fproduct%2F20260305102238_476739a757cf4088bd87ea6c21fe79a3.jpg"
+  },
+  {
+    "g": "B",
     "name": "춘수산 랜덤 피규어 — 어부 춘식이",
     "count": 2,
     "url": "https://st.kakaocdn.net/thumb/R890x0/?fname=https%3A%2F%2Fst.kakaocdn.net%2Fshoppingstore%2Feditor%2F20260305093429_eb58845d06c94851b73100a5052c3629.jpg"
   },
   {
-    "g": "B",
+    "g": "C",
     "name": "춘수산 랜덤 피규어 — 자연산 춘식이",
-    "count": 2,
+    "count": 6,
     "url": "https://st.kakaocdn.net/thumb/R890x0/?fname=https%3A%2F%2Fst.kakaocdn.net%2Fshoppingstore%2Feditor%2F20260305093423_da4801913aab4ab8a2ad100ce4542a8b.jpg"
   },
   {
-    "g": "C",
-    "name": "춘식이 봉제인형 키링",
-    "count": 6,
-    "url": "https://media.bunjang.co.kr/product/375149245_1_1766519465_w1200.jpg"
-  },
-  {
     "g": "D",
-    "name": "춘수산 랜덤 피규어 풀세트",
+    "name": "춘식이 덮밥 그릇 & 뚜껑",
     "count": 10,
-    "url": "https://img1.kakaocdn.net/thumb/P750x750%402x.fwebp.q82/?fname=https%3A%2F%2Fst.kakaocdn.net%2Fshoppingstore%2Fproduct%2F20260305102238_476739a757cf4088bd87ea6c21fe79a3.jpg"
+    "url": "https://thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/b822/635b07350623a49ae55aa9c126d5ba28dd0d985d01158a942c084f6c9743.png"
   },
   {
     "g": "E",
@@ -732,9 +741,9 @@ const choonPrizes=[
   },
   {
     "g": "LAST",
-    "name": "춘식이 덮밥 그릇 & 뚜껑 (게임용 라스트원)",
+    "name": "춘식이 봉제인형 키링 (게임용 라스트원)",
     "count": 0,
-    "url": "https://thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/b822/635b07350623a49ae55aa9c126d5ba28dd0d985d01158a942c084f6c9743.png"
+    "url": "https://media.bunjang.co.kr/product/375149245_1_1766519465_w1200.jpg"
   }
 ];
 const pokemonPrizes=
@@ -788,8 +797,7 @@ const pokemonPrizes=
     "url": "https://www.pokemoncenter-online.com/a/img/item/4521329386911/L/01c908c38ebf2c6b434ba2f6681496ba2413f65bae484eb4d028b8fd44bcd8a0.jpg"
   }
 ];
-const nikkePrizes=
-[
+const nikkePrizes=[
   {
     "g": "A",
     "name": "앨리스 넨도로이드 · 표정/파츠 교체 피규어",
@@ -889,8 +897,7 @@ const bearPrizes=[
     "url": "https://prcdn.freetls.fastly.net/release_image/168561/61/168561-61-cc9ae7cec75058830795517cf0c0d4aa-1500x1500.jpg"
   }
 ];
-const bluePrizes=
-[
+const bluePrizes=[
   {
     "g": "A",
     "name": "아로나 넨도로이드 피규어",
