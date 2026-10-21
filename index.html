@@ -670,15 +670,15 @@ const overPrizes=[
   },
   {
     "g": "B",
-    "name": "샤르티아 1/7 Gracemaster 피규어",
+    "name": "샤르티아 블러드폴른 1/7 Gracemaster 피규어",
     "count": 2,
-    "url": "https://on-line.1kuji.com/Contents/ProductImages/0/9058313_prize_00002_LL.jpg"
+    "url": "https://on-line.1kuji.com/Contents/ProductImages/0/9058313_2873321_LL.jpg"
   },
   {
     "g": "C",
-    "name": "빅 메탈릭 포스터",
+    "name": "나자릭 빅 메탈릭 포스터",
     "count": 3,
-    "url": "https://on-line.1kuji.com/Contents/ProductImages/0/9058313_prize_00003_LL.jpg"
+    "url": "https://on-line.1kuji.com/Contents/ProductSubImages/0/9058313_sub03_LL.jpg"
   },
   {
     "g": "D",
@@ -700,19 +700,19 @@ const overPrizes=[
   },
   {
     "g": "G",
-    "name": "오버로드 IV 캐릭터 클리어파일 B",
+    "name": "나자릭 수호자 클리어파일 세트",
     "count": 20,
-    "url": "https://img.amiami.jp/images/product/main/223/GOODS-04281706.jpg"
+    "url": "https://on-line.1kuji.com/Contents/ProductSubImages/0/9058313_sub07_LL.jpg"
   },
   {
     "g": "H",
-    "name": "오버로드 캐릭터 스티커 시트",
-    "url": "https://geemerch.com/cdn/shop/files/486140.jpg?v=1718412383",
+    "name": "오버로드 IV 캐릭터 클리어파일 B",
+    "url": "https://img.amiami.jp/images/product/main/223/GOODS-04281706.jpg",
     "count": 24
   },
   {
     "g": "I",
-    "name": "오버로드 캐릭터 스티커 1매",
+    "name": "오버로드 알베도 캐릭터 스티커 1매",
     "url": "https://geemerch.com/cdn/shop/files/486140.jpg?v=1718412383",
     "count": 90
   },
@@ -1967,7 +1967,7 @@ function photoCandidates(p){
  const all=[raw,...extra],result=[];
  for(const u of all){
    if(!u)continue;
-   if(/^https?:\/\//i.test(u)){result.push(kujiProxy(u),u);}
+   if(/^https?:\/\//i.test(u)){result.push(u,kujiProxy(u));}
    else result.push(u);
  }
  return [...new Set(result)];
