@@ -36,5 +36,6 @@ jobs:
           if grep -q '^Themes: .*Broken: 0. Duplicate URLs: 0.$' IMAGE_AUDIT.md; then
             echo "All photos and unique source URLs verified"
           else
-            echo "::warning::Image audit found missing or duplicate photos; inspect IMAGE_AUDIT.md"
+            echo "::error::Image audit found missing or duplicate photos; inspect IMAGE_AUDIT.md"
+            exit 1
           fi
