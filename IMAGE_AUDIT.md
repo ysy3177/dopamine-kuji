@@ -1,6 +1,6 @@
 # Kuji image audit
 
-Themes: 19. Images cached this run: 1. Broken: 3. Duplicate URLs: 52.
+Themes: 19. Images cached this run: 0. Broken: 3. Duplicate URLs: 52.
 
 ## Unavailable images
 - quintPrizes / E / https://www.prime1studio.co.jp/en/pspgthn-17.html / HTTP Error 404: Not Found
